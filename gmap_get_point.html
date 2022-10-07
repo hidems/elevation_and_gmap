@@ -1,0 +1,70 @@
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <title>Google Maps Point Marker</title>
+     
+    <style type="text/css">
+    #map {
+      height: 600px;
+      width: 80%;
+    }
+    </style>
+     
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+    var marker = null;
+    var lat = 35.729493379635535;
+    var lng = 139.71086479574538;
+     
+    function init() {
+      //initialize map
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 18, center: {lat: lat, lng: lng}
+      });
+     
+      document.getElementById('lat').value = lat;
+      document.getElementById('lng').value = lng;
+     
+      //initial marker
+      marker = new google.maps.Marker({
+        map: map, position: new google.maps.LatLng(lat, lng),
+      });
+     
+      //Click event
+      map.addListener('click', function(e) {
+        clickMap(e.latLng, map);
+      });
+    }
+     
+    function clickMap(geo, map) {
+      lat = geo.lat();
+      lng = geo.lng();
+          
+      document.getElementById('lat').value = lat;
+      document.getElementById('lng').value = lng;
+     
+      //Move marker to center
+      map.panTo(geo);
+     
+      //Update marker position
+      marker.setMap(null);
+      marker = null;
+      marker = new google.maps.Marker({
+        map: map, position: geo 
+      });
+      
+    }
+    </script>
+     
+    <body onload="javascript:init();">
+     
+    <p>Google Maps Point Marker</p>
+     
+    <div id="map" style="margin-top: 10px; margin-bottom:15px;"></div>
+     
+    Longitude:<input type="text" id="lat" name="lat" value="" size="20">Latitude:<input type="text" id="lng" name="lng" value="" size="20">
+     
+    </body>
+    </html>
