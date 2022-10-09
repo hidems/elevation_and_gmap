@@ -1,0 +1,23 @@
+<h1>elevation api</h1>
+
+<script>
+  // Elevation
+  
+  // $.ajax({
+  //   type: 'GET',
+  //   url: 'https://api.opentopodata.org/v1/etopo1?locations=39.747114,-104.996334',
+  //   contentType: "application/json",
+  //   dataType: 'json',
+  // }).then(function(response){
+  //   console.log(response)
+  // });
+
+  let url = 'https://api.opentopodata.org/v1/etopo1?locations=39.747114,-104.996334';
+  fetch(url, {mode: 'no-cors'})
+  .then((output) => {
+    console.log('Output: ', output);
+    console.log('JSON: ', output.json());
+  });
+  // .then(response => response.text())
+  // .then(data => console.log(data));
+</script>
