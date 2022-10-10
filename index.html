@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+  <title>Google Maps JavaScript API v3 Example: Elevation Service</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+
+  <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <h1>Elevation</h1>
+  <script>
+    $(function(){
+    $.ajax({
+        url: 'elevation_api_python.py',
+        type: 'post',
+        data: '送信メッセージ'
+    }).done(function(data){
+        console.log(data);
+    }).fail(function(){
+        console.log('failed');
+    });
+});
+  </script>
+</body>
