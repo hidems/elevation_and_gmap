@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maps Point Marker and Elevation</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+
+</head>
+     
+<body onload="javascript:init();">
+     
+  <p>Maps Point Marker and Elevation</p>
+     
+  <div id="map" style="margin-top: 10px; margin-bottom:15px;"></div>
+     
+  Longitude:<input type="text" id="lng" name="lng" value="" size="20">
+  Latitude:<input type="text" id="lat" name="lat" value="" size="20">
+
+</body>
+</html>
