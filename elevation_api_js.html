@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<h1>elevation api</h1>
+
+<script>
+  // Elevation API
+  let url = 'https://api.opentopodata.org/v1/etopo1?locations=39.747114,-104.996334';
+  fetch(url, {mode: 'no-cors'})
+  .then((output) => {
+    console.log(output);
+    return output.json();
+  }).then((res) => {
+    console.log(res);
+  });
+
+</script>
+</html>
