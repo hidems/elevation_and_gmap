@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .w300 {
+        width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <form id="form">
+    <div id="image"></div>
+    <button id="lookCat" type="button">猫見る</button>
+  </form>
+  <script>
+    const url = './get_data';
+    const options = {
+      method: 'GET'
+    }
+    function getCatImage(url, options){
+      return fetch(url, options)
+      .then( response => response.json() );
+    }
+    async function getImage(url, options){
+      const response = await getCatImage(url, options);
+      const imageDiv = document.getElementById("image");
+      const imageElement = document.createElement("img");
+      imageElement.src = response.cat_img_url;
+      imageElement.className = "w300";
+      imageDiv.appendChild(imageElement);
+    }
+
+    const url_2 = './get_data_2';
+    const options_2 = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'lat': 39.747114,
+        'lng': -104.996334
+      })
+    }
+    function getElevationAPI(url, options){
+      return fetch(url, options)
+      .then( response => response.json() );
+    }
+    async function getElevation(url, options){
+      const response = await getElevationAPI(url, options);
+      console.log(response.elevation);
+    }
+
+    document.getElementById("lookCat")
+    .addEventListener("click", () =>{
+        getImage(url, options)
+        getElevation(url_2, options_2)
+    })
+  </script>
+</body>
+</html>

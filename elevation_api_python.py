@@ -5,5 +5,7 @@ url = "https://api.opentopodata.org/v1/etopo1?locations=39.747114,-104.996334"
 
 r = requests.get(url)
 
+data = r.json()
+
 print(r.text)
-print(r.json())
+print(data['results'][0]['elevation'])
