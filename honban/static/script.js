@@ -32,6 +32,9 @@ function clickMap(geo, map) {
   document.getElementById('lat').value = lat;
   document.getElementById('lng').value = lng;
 
+  // Initial elevation
+  setElevation(lat, lng);
+
   // Move marker to center
   map.panTo(geo);
 
