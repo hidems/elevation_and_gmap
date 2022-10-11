@@ -29,7 +29,7 @@ function init() {
   // Input event
   document.querySelectorAll(".latlng").forEach(function () {
     this.addEventListener('input', function (e) {
-      changeLatLng();
+      changeLatLng(map);
     })
   })
 }
@@ -56,7 +56,7 @@ function clickMap(geo, map) {
   });
 }
 
-function changeLatLng() {
+function changeLatLng(map) {
   lat = document.getElementById('lat').value;
   lng = document.getElementById('lng').value;
   latlng = new google.maps.LatLng(lat, lng);
@@ -64,15 +64,14 @@ function changeLatLng() {
   // Initial elevation
   setElevation(lat, lng);
 
-  // Update map
-  const newMap = new google.maps.Map(map, {
-    zoom: 18,
-    center: latlng,
-  });
+  // Move marker to center
+  map.setCenter(latlng);
 
   // Update marker position
+  marker.setMap(null);
+  marker = null;
   marker = new google.maps.Marker({
-    map: newMap,
+    map: map,
     position: latlng,
   });
 
