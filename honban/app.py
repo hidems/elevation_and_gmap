@@ -21,7 +21,7 @@ def get_elevation():
         'elevation': response['results'][0]['elevation']
     }
 
-    return jsonify(response_data)  # jsonifyでjs側に返却する
+    return jsonify(response_data)
 
 
 if __name__ == "__main__":

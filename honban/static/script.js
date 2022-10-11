@@ -5,7 +5,8 @@ var lng = 16.373469829559326;
 function init() {
   // initialize map
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 18, center: { lat: lat, lng: lng }
+    zoom: 18,
+    center: { lat: lat, lng: lng },
   });
 
   document.getElementById('lat').value = lat;
@@ -16,13 +17,21 @@ function init() {
 
   // Initial marker
   marker = new google.maps.Marker({
-    map: map, position: new google.maps.LatLng(lat, lng),
+    map: map,
+    position: new google.maps.LatLng(lat, lng),
   });
 
   // Click event
   map.addListener('click', function (e) {
     clickMap(e.latLng, map);
   });
+
+  // Input event
+  document.querySelectorAll(".latlng").forEach(function () {
+    this.addEventListener('input', function (e) {
+      changeLatLng();
+    })
+  })
 }
 
 function clickMap(geo, map) {
@@ -42,8 +51,31 @@ function clickMap(geo, map) {
   marker.setMap(null);
   marker = null;
   marker = new google.maps.Marker({
-    map: map, position: geo
+    map: map,
+    position: geo
   });
+}
+
+function changeLatLng() {
+  lat = document.getElementById('lat').value;
+  lng = document.getElementById('lng').value;
+  latlng = new google.maps.LatLng(lat, lng);
+
+  // Initial elevation
+  setElevation(lat, lng);
+
+  // Update map
+  const newMap = new google.maps.Map(map, {
+    zoom: 18,
+    center: latlng,
+  });
+
+  // Update marker position
+  marker = new google.maps.Marker({
+    map: newMap,
+    position: latlng,
+  });
+
 }
 
 async function setElevation(lat, lng) {
@@ -61,5 +93,6 @@ async function setElevation(lat, lng) {
   const response = await fetch(url, options)
     .then(response => response.json());
 
+  // Update elevation
   document.getElementById('elev').innerHTML = response.elevation;
 }
